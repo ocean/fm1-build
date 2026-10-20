@@ -6,7 +6,7 @@
   or write. **attest** signs exactly the packages in `SHA256SUMS`. **release** checks them again, and only it can
   write.
 - Everything downloaded is pinned and checked: JieLi's toolchain by its SHA-256, the AC79 SDK by its commit, and
-  Pillow by its hash.
+  Pillow by its hash (13.0.0: 12.3.0 has nine advisories, one critical).
 - Every action on Node 24 (GitHub is retiring Node 20): checkout v7.0.1, setup-python v7.0.0, upload-artifact
   v7.0.1, download-artifact v8.0.1, attest-build-provenance v4.2.2. All pinned to commit SHAs.
 - The release is made with `gh` (no third-party release action). It uploads to a release that already exists, and

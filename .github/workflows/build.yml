@@ -70,14 +70,15 @@ permissions: {}
 # Everything downloaded is pinned and checked before it is used. To update one, check the new file (a signature or a
 # provenance where its maker publishes one), then change the pin here, in a new tag of this workflow.
 #   JIELI_URL: where pkgman.jieliapp.com/s/linux-toolchain leads today
-#   PILLOW: the wheel for Python 3.12 on x86_64 Linux
+#   PILLOW: the wheel for Python 3.12 on x86_64 Linux. 13.0.0: nine advisories against 12.3.0 (one critical,
+#           GHSA-8g5g-8vmr-9782), fixed only here; published by python-pillow/Pillow's wheels.yml (PyPI trusted publishing)
 #   ZIG_URL: minisign-signed by Zig's maintainers (ziglang.org/download)
 env:
   JIELI_URL: https://jl-update.oss-cn-shenzhen.aliyuncs.com/jieli-linux-toolchains-20260730.1.tar.xz
   JIELI_SHA256: a1545cddbc451a06bac43eb5cd96d831470c42a97c5c0b1f98879a20fc7647bd
   SDK_TAG: AC79NN_SDK_V1.2.1_2023-12-13
   SDK_COMMIT: d179b4484759423312073f5fbb232501aa491047
-  PILLOW: pillow==12.3.0 --hash=sha256:78cb2c6865a35ab8ff8b75fd122f6033b92a62c82801110e48ddd6c936a45d91
+  PILLOW: pillow==13.0.0 --hash=sha256:42d63be3af4f9b951b199b0a9d23365d37ab14687e6d77b74940432c8515c4ca
   ZIG_URL: https://ziglang.org/download/0.17.0/zig-x86_64-linux-0.17.0.tar.xz
   ZIG_SHA256: 1cbe9df9f27e6b78d14ccbca43b6703a404ef79ef1c463de901d7f088d4e2026
 
