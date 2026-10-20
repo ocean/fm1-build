@@ -13,6 +13,8 @@
   never replaces a file.
 - New input `zig`: Zig 0.17.0, pinned, for a WebAssembly build.
 - `packages` can be several globs. Their names must differ, since a release holds one file of a name.
+- zizmor audits this repository's own workflows (`.github/workflows/zizmor.yml`) on every push, every pull request
+  and weekly. A finding fails the run, so a weakness in the workflow, or in an action it pins, shows up here.
 - The same inputs and the same release as v1, so a firmware only changes `@v1` to `@v2`.
 
 ## v1 (2026-10-18)

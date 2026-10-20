@@ -1,0 +1,39 @@
+# zizmor (docs.zizmor.sh) audits this repository's own workflows: pinning, permissions, injection, impostor commits
+# and the rest, on every push and pull request, and weekly, so a check added to zizmor later, or a weakness found in
+# a pinned action, turns up here too. A finding fails the run.
+name: zizmor
+
+on:
+  push:
+  pull_request:
+  schedule:
+    - cron: "23 4 * * 1"
+
+permissions: {}
+
+jobs:
+  zizmor:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      contents: read           # the checkout, and zizmor's lookups of the pinned actions (impostor commits, refs)
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1   # v7.0.1
+        with:
+          persist-credentials: false
+
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97   # v7.0.0
+        with:
+          python-version: '3.12'
+
+      - name: zizmor (pinned, hash-checked)
+        env:
+          ZIZMOR: zizmor==1.30.1 --hash=sha256:eee12266b793cb87ad4a7e3af2e72404f8a63e3de5eb099b80bf7b1cfd232a8e
+        run: |
+          echo "$ZIZMOR" > "$RUNNER_TEMP/requirements.txt"
+          python3 -m pip install --require-hashes --only-binary=:all: -r "$RUNNER_TEMP/requirements.txt"
+
+      - name: Audit the workflows
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: zizmor --format github .github/workflows

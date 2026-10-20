@@ -22,6 +22,9 @@ It runs as three jobs, and each gets only the permissions it needs:
 3. **release** (on a tag; write): checks the packages against `SHA256SUMS` again, then publishes them as the release
    of that tag.
 
+[zizmor](https://docs.zizmor.sh) audits these workflows on every push, every pull request and weekly
+(`.github/workflows/zizmor.yml`).
+
 Your build command runs where it can't sign anything or write to your repository. The jobs that can do those
 things run none of your code and nothing downloaded.
 
